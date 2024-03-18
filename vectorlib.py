@@ -14,32 +14,20 @@ class Vector:
     def from_point(cls, point: Sequence[FloatOrInt]) -> Vector:
         return Vector()
 
-    def __add__(self, other):
-        pass
+    def __add__(self, other) -> Vector:
+        raise NotImplementedError()
 
-    def __sub__(self, other):
-        pass
-
-    def __mul__(self, other):
-        pass
-
-    def __div__(self, other):
-        pass
-
-    def __truediv__(self, other):
-        pass
+    def __sub__(self, other) -> Vector:
+        raise NotImplementedError()
 
     def __neg__(self):
-        pass
+        raise NotImplementedError()
 
     def __pos__(self):
-        pass
+        raise NotImplementedError()
 
-    def __abs__(self):
-        pass
-
-    def __invert__(self):
-        pass
+    def __abs__(self) -> FloatOrInt:
+        raise NotImplementedError()
 
 
 def main() -> int:
