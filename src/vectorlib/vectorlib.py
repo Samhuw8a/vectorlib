@@ -9,6 +9,7 @@ class Vector:
     """a python representation of a mathmatical Vector"""
 
     def __init__(self, components: Sequence[FloatOrInt]) -> None:
+        # TODO RuntimeChecking
         self.components: tuple = tuple(components)
 
     def __repr__(self) -> str:
