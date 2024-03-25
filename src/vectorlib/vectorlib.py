@@ -54,10 +54,11 @@ class Vector:
         return Vector(new_comp)
 
     def __neg__(self) -> Vector:
-        return Vector([-i for i in self.components])
+        new_comp = [i.__neg__() for i in self.components]
+        return Vector(new_comp)
 
     def __pos__(self) -> Vector:
-        return Vector([+i for i in self.components])
+        return self
 
     def __abs__(self) -> FloatOrInt:
         return sqrt(sum((i**2 for i in self.components)))
@@ -70,11 +71,6 @@ class Vector:
 
 
 def main() -> int:
-    v = Vector((1, 2, 4))
-    a = Vector((5, 3, 2))
-    print(v + a)
-    print(v + a - v == a)
-    print(abs(v))
     return 0
 
 
