@@ -13,7 +13,7 @@ class Vector:
         if not isinstance(components, (tuple, list)):
             raise TypeError("Vector only takes tuples or lists as parameters")
         if len(components) == 0:
-            raise ValueError("A Vector can't be zerodimensional")
+            raise ValueError("A Vector can't be zero dimensional")
 
         self.components: tuple = tuple(components)
 
@@ -54,10 +54,10 @@ class Vector:
         return Vector(new_comp)
 
     def __neg__(self) -> Vector:
-        raise NotImplementedError()
+        return Vector([-i for i in self.components])
 
     def __pos__(self) -> Vector:
-        raise NotImplementedError()
+        return Vector([+i for i in self.components])
 
     def __abs__(self) -> FloatOrInt:
         return sqrt(sum((i**2 for i in self.components)))
