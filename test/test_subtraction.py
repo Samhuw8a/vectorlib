@@ -1,6 +1,7 @@
 from vectorlib import Vector
 from hypothesis import given
 from hypothesis.strategies import lists, integers
+import pytest
 
 
 def calc_res(v1: list, v2: list) -> list:
@@ -29,3 +30,18 @@ def test_subtraction_3(v1: list, v2: list) -> None:
 def test_subtraction_4(v1: list, v2: list) -> None:
     res = calc_res(v1, v2)
     assert Vector(v1) - Vector(v2) == Vector(res)
+
+
+def test_dimension_missmatch():
+    with pytest.raises(ValueError):
+        Vector((1, 3)) + Vector((1,))
+        Vector((1, 4, 5)) + Vector((1,))
+        Vector((1, 3)) + Vector((1, 2, 4))
+
+
+def test_type_missmatch():
+    with pytest.raises(TypeError):
+        Vector(1, 2) + 3
+        Vector(1, 2) + 1.0
+        Vector(1, 2) + []
+        Vector(1, 2) + ""

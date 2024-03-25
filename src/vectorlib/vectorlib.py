@@ -1,15 +1,20 @@
 from __future__ import annotations
-from typing import Sequence, Union, Any
+from typing import Union, Any, List, Tuple
 from math import sqrt
 
 FloatOrInt = Union[float, int]
+Components = Union[List[FloatOrInt], Tuple[FloatOrInt, ...]]
 
 
 class Vector:
     """a python representation of a mathmatical Vector"""
 
-    def __init__(self, components: Sequence[FloatOrInt]) -> None:
-        # TODO RuntimeChecking
+    def __init__(self, components: Components) -> None:
+        if not isinstance(components, (tuple, list)):
+            raise TypeError("Vector only takes tuples or lists as parameters")
+        if len(components) == 0:
+            raise ValueError("A Vector can't be zerodimensional")
+
         self.components: tuple = tuple(components)
 
     def __repr__(self) -> str:
@@ -30,7 +35,7 @@ class Vector:
         if not isinstance(other, Vector):
             raise TypeError("Addition is only suported between Vectors.")
         elif len(other) != len(self):
-            raise TypeError(
+            raise ValueError(
                 f"Vector of len:{len(other)} can't be added to Vector of len:{len(self)}"
             )
 
@@ -41,7 +46,7 @@ class Vector:
         if not isinstance(other, Vector):
             raise TypeError("Addition is only suported between Vectors.")
         elif len(other) != len(self):
-            raise TypeError(
+            raise ValueError(
                 f"Vector of len:{len(other)} can't be added to Vector of len:{len(self)}"
             )
 

@@ -28,8 +28,16 @@ def test_addition_4(v1: list, v2: list) -> None:
     assert Vector(v1) + Vector(v2) == Vector(res)
 
 
-def test_raises():
+def test_dimension_missmatch():
+    with pytest.raises(ValueError):
+        Vector((1, 3)) - Vector((1,))
+        Vector((1, 4, 5)) - Vector((1,))
+        Vector((1, 3)) - Vector((1, 2, 4))
+
+
+def test_type_missmatch():
     with pytest.raises(TypeError):
-        Vector((1, 3)) + Vector((1,))
-        Vector((1, 4, 5)) + Vector((1,))
-        Vector((1, 3)) + Vector((1, 2, 4))
+        Vector(1, 2) - 3
+        Vector(1, 2) - 1.0
+        Vector(1, 2) - []
+        Vector(1, 2) - ""
