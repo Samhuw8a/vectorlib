@@ -53,6 +53,15 @@ class Vector:
         new_comp = [s - o for s, o in zip(self.components, other.components)]
         return Vector(new_comp)
 
+    def __mul__(self, other: FloatOrInt) -> Vector:
+        if not isinstance(other, (float, int)):
+            raise TypeError("Vector multiplication is only supported for numbers")
+        new_comp = [i * other for i in self.components]
+        return Vector(new_comp)
+
+    def __rmul__(self, other: FloatOrInt) -> Vector:
+        return self.__mul__(other)
+
     def __neg__(self) -> Vector:
         new_comp = [i.__neg__() for i in self.components]
         return Vector(new_comp)
@@ -64,7 +73,24 @@ class Vector:
         return sqrt(sum((i**2 for i in self.components)))
 
     def cross(self, other: Vector) -> Vector:
-        raise NotImplementedError()
+        if not isinstance(other, Vector):
+            raise TypeError(
+                "the crossproduct can only be calculated between to 3D Vectors"
+            )
+        if len(self) != 3 or len(other) != 3:
+            raise ValueError(
+                f"the crossproduct can only be calculated between to 3D Vectors got: {len(self)}:{len(other)}"
+            )
+        a1 = self.components[1] * other.components[2]
+        a2 = self.components[2] * other.components[1]
+
+        b1 = self.components[2] * other.components[0]
+        b2 = self.components[0] * other.components[2]
+
+        c1 = self.components[0] * other.components[1]
+        c2 = self.components[1] * other.components[0]
+        new_comp = (a1 - a2, b1 - b2, c1 - c2)
+        return Vector(new_comp)
 
     def scalar(self, other: Vector) -> FloatOrInt:
         raise NotImplementedError()
