@@ -1,6 +1,6 @@
 from __future__ import annotations
 from typing import Union, Any, List, Tuple
-from math import sqrt
+from math import sqrt, asin
 
 FloatOrInt = Union[float, int]
 Components = Union[List[FloatOrInt], Tuple[FloatOrInt, ...]]
@@ -93,7 +93,20 @@ class Vector:
         return Vector(new_comp)
 
     def scalar(self, other: Vector) -> FloatOrInt:
-        raise NotImplementedError()
+        if not isinstance(other, Vector):
+            raise TypeError("scalar product is only supported between Vectos")
+        if not len(self) == len(other):
+            raise ValueError(
+                f"The Vectors have to be of the same dimension got: {len(self)}:{len(other)}"
+            )
+        val = sum(s * o for s, o in zip(self.components, other.components))
+        return float(val)
+
+
+def vector_angle(v1: Vector, v2: Vector) -> float:
+    """Calculates to angle between two Vectors"""
+    angle_sin = abs(v1.cross(v2)) / (abs(v1) * abs(v2))
+    return asin(angle_sin)
 
 
 def main() -> int:

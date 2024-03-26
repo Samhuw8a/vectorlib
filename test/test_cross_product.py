@@ -4,7 +4,7 @@ from hypothesis.strategies import lists, integers
 import pytest
 import numpy as np
 
-MAX = 1_000_000
+MAX = 100_000_000
 
 
 @given(
