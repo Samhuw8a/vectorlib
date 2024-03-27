@@ -12,7 +12,7 @@ MAX = 100_000_000
     lists(integers(max_value=MAX, min_value=-MAX), min_size=3, max_size=3),
 )
 def test_crossproduct(v1: list, v2: list) -> None:
-    res = list(np.cross(v1, v2))
+    res = [int(i) for i in np.cross(v1, v2)]
     assert Vector(v1).cross(Vector(v2)) == Vector(res)
 
 

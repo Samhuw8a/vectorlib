@@ -14,6 +14,8 @@ class Vector:
             raise TypeError("Vector only takes tuples or lists as parameters")
         if len(components) == 0:
             raise ValueError("A Vector can't be zero dimensional")
+        if not all(isinstance(i, (float, int)) for i in components):
+            raise TypeError(f"Vector can only take numbers as components got:{[type(i) for i in components]}")
 
         self.components: tuple = tuple(components)
 
@@ -110,6 +112,9 @@ def vector_angle(v1: Vector, v2: Vector) -> float:
 
 
 def main() -> int:
+    v1 = Vector([0, 0, 0])
+    v2 = Vector([0, 0, 0])
+    print(v1.cross(v2))
     return 0
 
 
