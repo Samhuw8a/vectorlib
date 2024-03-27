@@ -3,7 +3,7 @@ from typing import Union, Any, List, Tuple
 from math import sqrt, asin
 
 FloatOrInt = Union[float, int]
-Components = Union[List[FloatOrInt], Tuple[FloatOrInt, ...]]
+Components = Union[List[int], List[float], Tuple[FloatOrInt, ...]]
 
 
 class Vector:
@@ -15,7 +15,8 @@ class Vector:
         if len(components) == 0:
             raise ValueError("A Vector can't be zero dimensional")
         if not all(isinstance(i, (float, int)) for i in components):
-            raise TypeError(f"Vector can only take numbers as components got:{[type(i) for i in components]}")
+            raise TypeError(
+                f"Vector can only take numbers as components got:{[type(i) for i in components]}")
 
         self.components: tuple = tuple(components)
 
