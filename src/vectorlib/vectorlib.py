@@ -20,9 +20,9 @@ class Vector:
             raise TypeError(
                 f"Vector can only take numbers as components got:{[type(i) for i in components]}")
 
-        if any(i == float("nan") or i == float("inf") for i in components):
+        if any(i == float("nan") for i in components):
             raise TypeError(
-                "Vector cant take nan of inf as parameters"
+                "Vector cant take nan as parameters"
             )
 
         self.components: list = list(components)
