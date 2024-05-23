@@ -12,13 +12,29 @@ class Vector:
     def __init__(self, components: Components) -> None:
         if not isinstance(components, (tuple, list)):
             raise TypeError("Vector only takes tuples or lists as parameters")
+
         if len(components) == 0:
             raise ValueError("A Vector can't be zero dimensional")
+
         if not all(isinstance(i, (float, int)) for i in components):
             raise TypeError(
                 f"Vector can only take numbers as components got:{[type(i) for i in components]}")
 
-        self.components: tuple = tuple(components)
+        if any(i == float("nan") or i == float("inf") for i in components):
+            raise TypeError(
+                "Vector cant take nan of inf as parameters"
+            )
+
+        self.components: list = list(components)
+
+    def __getitem__(self, index: int) -> FloatOrInt:
+        return self.components[index]
+
+    def __setitem__(self, index: int, value: FloatOrInt) -> None:
+        if not isinstance(value, (float, int)):
+            raise TypeError(
+                f"type: {type(value)} is not supported for Vector elements.")
+        self.components[index] = value
 
     def __repr__(self) -> str:
         return f"Vector({tuple(self.components)})"

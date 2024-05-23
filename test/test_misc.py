@@ -16,6 +16,8 @@ def test_init_raises():
         Vector(1)
         Vector(1.0)
         Vector({1, 2, 4})
+        Vector((1, 2, 4, float("nan")))
+        Vector([1, 2, 4, float("nan")])
     with pytest.raises(ValueError):
         Vector([])
         Vector(tuple())
